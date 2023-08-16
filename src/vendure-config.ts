@@ -10,6 +10,7 @@ import { AdminUiPlugin } from '@vendure/admin-ui-plugin'
 import 'dotenv/config'
 import path from 'path'
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler'
+import { ReviewsPlugin } from './plugins/reviews'
 
 const IS_DEV = process.env.APP_ENV === 'dev'
 
@@ -113,5 +114,6 @@ export const config: VendureConfig = {
         devMode: true,
       }),
     }),
+    ReviewsPlugin,
   ],
 }
