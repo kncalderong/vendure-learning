@@ -1,8 +1,9 @@
 import { LanguageCode, PluginCommonModule, VendurePlugin } from '@vendure/core'
 
-import { adminApiExtensions } from './api/api-extensions'
+import { adminApiExtensions, shopApiExtensions } from './api/api-extensions'
 import { ProductReviewAdminResolver } from './api/product-review-admin.resolver'
 import { ProductReview } from './entity/product-review.entity'
+import { ProductEntityResolver } from './api/product-entity.resolver'
 
 @VendurePlugin({
   imports: [PluginCommonModule],
@@ -10,7 +11,11 @@ import { ProductReview } from './entity/product-review.entity'
   entities: [ProductReview],
   adminApiExtensions: {
     schema: adminApiExtensions,
-    resolvers: [ProductReviewAdminResolver],
+    resolvers: [ProductReviewAdminResolver, ProductEntityResolver],
+  },
+  shopApiExtensions: {
+    schema: shopApiExtensions,
+    resolvers: [ProductEntityResolver],
   },
   compatibility: '^2.0.0',
 })

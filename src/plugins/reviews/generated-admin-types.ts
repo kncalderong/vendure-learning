@@ -118,3 +118,7 @@ export type QueryProductReviewsArgs = {
 export type QueryProductReviewArgs = {
   id: Scalars['ID']['input']
 }
+
+export type ProductReviewsArgs = {
+  options?: InputMaybe<ProductReviewListOptions>
+}

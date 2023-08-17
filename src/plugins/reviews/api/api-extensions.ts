@@ -15,6 +15,10 @@ export const commonApiExtensions = gql`
     totalItems: Int!
   }
 
+  extend type Product {
+    reviews(options: ProductReviewListOptions): ProductReviewList!
+  }
+
   # Auto-generated at runtime
   input ProductReviewListOptions
 `
@@ -36,4 +40,8 @@ export const adminApiExtensions = gql`
   extend type Mutation {
     submitProductReview(input: SubmitProductReviewInput!): ProductReview!
   }
+`
+
+export const shopApiExtensions = gql`
+  ${commonApiExtensions}
 `
