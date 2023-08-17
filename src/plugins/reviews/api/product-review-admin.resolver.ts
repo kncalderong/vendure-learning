@@ -1,4 +1,7 @@
-import { MutationSubmitProductReviewArgs } from './../generated-admin-types'
+import {
+  MutationSubmitProductReviewArgs,
+  QueryProductReviewsArgs,
+} from './../generated-admin-types'
 import { Inject } from '@nestjs/common'
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
 import {
@@ -9,12 +12,16 @@ import {
   TransactionalConnection,
   Transaction,
   Product,
+  ListQueryBuilder,
 } from '@vendure/core'
 import { ProductReview } from '../entity/product-review.entity'
 
 @Resolver()
 export class ProductReviewAdminResolver {
-  constructor(private connection: TransactionalConnection) {}
+  constructor(
+    private connection: TransactionalConnection,
+    private listQueryBuilder: ListQueryBuilder
+  ) {}
 
   @Transaction()
   @Mutation()
@@ -33,5 +40,23 @@ export class ProductReviewAdminResolver {
     )
     review.product = product
     return this.connection.getRepository(ctx, ProductReview).save(review)
+  }
+
+  @Query()
+  @Allow(Permission.Public)
+  async productReviews(
+    @Ctx() ctx: RequestContext,
+    @Args() args: QueryProductReviewsArgs
+  ) {
+    return this.listQueryBuilder
+      .build(ProductReview, args.options || undefined, {
+        relations: ['product'],
+        ctx,
+      })
+      .getManyAndCount()
+      .then(([items, totalItems]) => ({
+        items,
+        totalItems,
+      }))
   }
 }

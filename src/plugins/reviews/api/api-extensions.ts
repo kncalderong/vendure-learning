@@ -9,6 +9,14 @@ export const commonApiExtensions = gql`
     text: String!
     rating: Float!
   }
+
+  type ProductReviewList implements PaginatedList {
+    items: [ProductReview!]!
+    totalItems: Int!
+  }
+
+  # Auto-generated at runtime
+  input ProductReviewListOptions
 `
 
 export const adminApiExtensions = gql`
@@ -18,6 +26,10 @@ export const adminApiExtensions = gql`
     productId: ID!
     rating: Float!
     text: String!
+  }
+
+  extend type Query {
+    productReviews(options: ProductReviewListOptions): ProductReviewList!
   }
 
   extend type Mutation {
