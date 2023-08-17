@@ -30,6 +30,7 @@ export const adminApiExtensions = gql`
 
   extend type Query {
     productReviews(options: ProductReviewListOptions): ProductReviewList!
+    productReview(id: ID!): ProductReview
   }
 
   extend type Mutation {

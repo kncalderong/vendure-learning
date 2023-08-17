@@ -114,3 +114,7 @@ export type MutationSubmitProductReviewArgs = {
 export type QueryProductReviewsArgs = {
   options?: InputMaybe<ProductReviewListOptions>
 }
+
+export type QueryProductReviewArgs = {
+  id: Scalars['ID']['input']
+}

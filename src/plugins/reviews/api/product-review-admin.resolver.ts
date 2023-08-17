@@ -1,5 +1,6 @@
 import {
   MutationSubmitProductReviewArgs,
+  QueryProductReviewArgs,
   QueryProductReviewsArgs,
 } from './../generated-admin-types'
 import { Inject } from '@nestjs/common'
@@ -58,5 +59,19 @@ export class ProductReviewAdminResolver {
         items,
         totalItems,
       }))
+  }
+
+  @Query()
+  @Allow(Permission.Public)
+  async productReview(
+    @Ctx() ctx: RequestContext,
+    @Args() args: QueryProductReviewArgs
+  ) {
+    return this.connection.getRepository(ctx, ProductReview).findOne({
+      where: { id: args.id },
+      relations: {
+        product: true,
+      },
+    })
   }
 }
