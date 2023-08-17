@@ -1,0 +1,45 @@
+<vdr-page-header>
+  <vdr-page-title></vdr-page-title>
+</vdr-page-header>
+<vdr-page-body>
+  <form class="form" [formGroup]="detailForm">
+    <vdr-page-detail-layout>
+      <vdr-page-detail-sidebar>
+        <vdr-card title="Product">
+          <img
+            class="product-image"
+            [src]="(entity?.product)!.featuredAsset!.preview + '?preset=small'"
+          />
+          <a
+            class="button-ghost mt-2"
+            [routerLink]="['/catalog', 'inventory', entity?.product.id]"
+            >{{ entity?.product.name }}
+            <clr-icon shape="arrow right"></clr-icon>
+          </a>
+        </vdr-card>
+        <vdr-card *ngIf="entity$ | async as entity">
+          <vdr-page-entity-info [entity]="entity" />
+        </vdr-card>
+      </vdr-page-detail-sidebar>
+      <vdr-page-block>
+        <vdr-card>
+          <div class="form-grid">
+            <vdr-form-field label="Text" for="text">
+              <input
+                id="text"
+                type="text"
+                formControlName="text"
+                [readonly]="!('UpdateCatalog' | hasPermission)"
+              />
+            </vdr-form-field>
+            <vdr-form-field label="Rating" for="rating">
+              <star-rating
+                [rating]="detailForm.get('rating')?.value"
+              ></star-rating>
+            </vdr-form-field>
+          </div>
+        </vdr-card>
+      </vdr-page-block>
+    </vdr-page-detail-layout>
+  </form>
+</vdr-page-body>
