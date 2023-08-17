@@ -104,6 +104,12 @@ export const config: VendureConfig = {
                 ngModuleName: 'GreeterModule',
               },
               {
+                type: 'lazy',
+                route: 'product-reviews',
+                ngModuleFileName: 'reviews-ui-lazy.module.ts',
+                ngModuleName: 'ReviewsUiLazyModule',
+              },
+              {
                 type: 'shared',
                 ngModuleFileName: 'greeter-shared.module.ts',
                 ngModuleName: 'GreeterSharedModule',
