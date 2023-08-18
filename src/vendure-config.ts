@@ -111,8 +111,8 @@ export const config: VendureConfig = {
               },
               {
                 type: 'shared',
-                ngModuleFileName: 'greeter-shared.module.ts',
-                ngModuleName: 'GreeterSharedModule',
+                ngModuleFileName: 'shared-extensions.module.ts',
+                ngModuleName: 'SharedModuleExtensions',
               },
             ],
           },

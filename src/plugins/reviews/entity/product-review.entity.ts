@@ -1,5 +1,5 @@
 import { DeepPartial } from '@vendure/common/lib/shared-types'
-import { Product, ProductVariant, VendureEntity } from '@vendure/core'
+import { Product, VendureEntity } from '@vendure/core'
 import { Column, Entity, ManyToOne } from 'typeorm'
 
 @Entity()

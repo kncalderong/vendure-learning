@@ -15,8 +15,15 @@ import { SharedModule, addNavMenuSection } from '@vendure/admin-ui/core'
           // Icon can be any of https://clarity.design/icons
           icon: 'cursor-hand-open',
         },
+        {
+          id: 'product-reviews',
+          label: 'Product Reviews', //label of the item in the navBar
+          routerLink: ['/extensions/product-reviews'], //route of our built extension
+          // Icon can be any of https://clarity.design/icons
+          icon: 'star',
+        },
       ],
     }),
   ],
 })
-export class GreeterSharedModule {}
+export class SharedModuleExtensions {}
