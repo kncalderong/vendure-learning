@@ -1,5 +1,11 @@
+import { gql } from 'graphql-tag'
 import { NgModule } from '@angular/core'
-import { SharedModule, addNavMenuSection } from '@vendure/admin-ui/core'
+import {
+  SharedModule,
+  addNavMenuSection,
+  addActionBarItem,
+} from '@vendure/admin-ui/core'
+import { firstValueFrom } from 'rxjs'
 
 @NgModule({
   imports: [SharedModule],
@@ -23,6 +29,41 @@ import { SharedModule, addNavMenuSection } from '@vendure/admin-ui/core'
           icon: 'star',
         },
       ],
+    }),
+    addActionBarItem({
+      id: 'get-review-complete',
+      label: 'Get All Review Details',
+      locationId: 'product-detail',
+      /* routerLink: (route) => {
+        const id = route.snapshot.params.id
+        return ['/extensions/product-reviews', id]
+      }, */
+      onClick: async (event, context) => {
+        const query = gql`
+          query GetProductReview($id: ID!) {
+            productReview(id: $id) {
+              text
+              rating
+            }
+          }
+        `
+
+        try {
+          const reviewsId = context.route.snapshot.params.id
+          const queryResult = await firstValueFrom(
+            context.dataService
+              .query(query, { id: reviewsId })
+              .mapSingle((item) => item)
+          )
+
+          console.log('query result: ', queryResult)
+
+          return queryResult
+        } catch (error) {
+          console.error('Error executing mutation:', error)
+        }
+      },
+      requiresPermission: 'ReadOrder',
     }),
   ],
 })
