@@ -59,7 +59,18 @@ export const config: VendureConfig = {
   },
   // When adding or altering custom field definitions, the database will
   // need to be updated. See the "Migrations" section in README.md.
-  customFields: {},
+  customFields: {
+    Product: [
+      {
+        name: 'intensity',
+        type: 'int',
+        min: 0,
+        max: 100,
+        defaultValue: 0,
+        ui: { component: 'slider-form-input' },
+      },
+    ],
+  },
   plugins: [
     AssetServerPlugin.init({
       route: 'assets',

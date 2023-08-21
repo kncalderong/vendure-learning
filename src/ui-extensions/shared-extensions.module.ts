@@ -1,15 +1,20 @@
 import { gql } from 'graphql-tag'
 import { NgModule } from '@angular/core'
+
 import {
   SharedModule,
   addNavMenuSection,
   addActionBarItem,
+  registerFormInputComponent,
 } from '@vendure/admin-ui/core'
 import { firstValueFrom } from 'rxjs'
+import { SliderControl } from './components/intensity-controller/intensity-controller.component'
 
 @NgModule({
   imports: [SharedModule],
+  declarations: [SliderControl],
   providers: [
+    registerFormInputComponent('slider-form-input', SliderControl),
     addNavMenuSection({
       id: 'greeter',
       label: 'My Extensions', //name of the group in the navBar
