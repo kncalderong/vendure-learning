@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -60,11 +59,15 @@ export class ProductReviewDetailComponent
 
   ngOnInit(): void {
     this.init()
+    console.log('this is beeing called')
+    console.log('entity: ', this.entity)
   }
 
   ngOnDestroy(): void {
     this.destroy()
   }
+
+  reviewText = this.entity?.rating
 
   protected setFormValues(entity: ProductReviewFragment): void {
     this.detailForm.patchValue({
