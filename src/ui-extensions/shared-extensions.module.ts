@@ -6,15 +6,24 @@ import {
   addNavMenuSection,
   addActionBarItem,
   registerFormInputComponent,
+  registerPageTab,
 } from '@vendure/admin-ui/core'
 import { firstValueFrom } from 'rxjs'
 import { SliderControl } from './components/intensity-controller/intensity-controller.component'
+import { AllProductReviewsListComponent } from './components/all-product-reviews-list/all-product-reviews-list.component'
 
 @NgModule({
   imports: [SharedModule],
   declarations: [SliderControl],
   providers: [
     registerFormInputComponent('slider-form-input', SliderControl),
+    registerPageTab({
+      location: 'product-detail',
+      tab: 'Reviews',
+      route: 'reviews',
+      tabIcon: 'star',
+      component: AllProductReviewsListComponent,
+    }),
     addNavMenuSection({
       id: 'greeter',
       label: 'My Extensions', //name of the group in the navBar
