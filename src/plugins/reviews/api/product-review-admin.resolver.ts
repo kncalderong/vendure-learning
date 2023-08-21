@@ -3,7 +3,6 @@ import {
   QueryProductReviewArgs,
   QueryProductReviewsArgs,
 } from './../generated-admin-types'
-import { Inject } from '@nestjs/common'
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
 import {
   Permission,

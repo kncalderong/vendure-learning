@@ -1,4 +1,4 @@
-import { LanguageCode, PluginCommonModule, VendurePlugin } from '@vendure/core'
+import { PluginCommonModule, VendurePlugin } from '@vendure/core'
 
 import { adminApiExtensions, shopApiExtensions } from './api/api-extensions'
 import { ProductReviewAdminResolver } from './api/product-review-admin.resolver'
