@@ -107,6 +107,10 @@ export const config: VendureConfig = {
           {
             // Points to the path containing our Angular "glue code" module
             extensionPath: path.join(__dirname, 'ui-extensions'),
+            //to connect translations
+            translations: {
+              en: path.join(__dirname, 'ui-extensions/translations/en.json'),
+            },
             ngModules: [
               {
                 type: 'lazy',
