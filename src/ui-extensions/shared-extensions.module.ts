@@ -8,16 +8,26 @@ import {
   registerFormInputComponent,
   registerPageTab,
   registerCustomDetailComponent,
+  registerDashboardWidget,
 } from '@vendure/admin-ui/core'
 import { firstValueFrom } from 'rxjs'
 import { SliderControl } from './components/intensity-controller/intensity-controller.component'
 import { AllProductReviewsListComponent } from './components/all-product-reviews-list/all-product-reviews-list.component'
 import { ProductInfoComponent } from './components/custom-detail-component/custom-detail-component.component'
+import { ReviewsWidgetComponent } from './components/reviews-widget/reviews-widget.component'
 
 @NgModule({
   imports: [SharedModule],
-  declarations: [SliderControl, ProductInfoComponent],
+  declarations: [SliderControl, ProductInfoComponent, ReviewsWidgetComponent],
   providers: [
+    registerDashboardWidget('reviews', {
+      title: 'Latest reviews',
+      supportedWidths: [4, 6, 8, 12],
+      loadComponent: () =>
+        import('./components/reviews-widget/reviews-widget.component').then(
+          (m) => m.ReviewsWidgetComponent
+        ),
+    }),
     registerFormInputComponent('slider-form-input', SliderControl),
     registerPageTab({
       location: 'product-detail',
