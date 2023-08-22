@@ -9,7 +9,7 @@ import { AssetServerPlugin } from '@vendure/asset-server-plugin'
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin'
 import 'dotenv/config'
 import path from 'path'
-import { compileUiExtensions } from '@vendure/ui-devkit/compiler'
+import { compileUiExtensions, setBranding } from '@vendure/ui-devkit/compiler'
 import { ReviewsPlugin } from './plugins/reviews'
 
 const IS_DEV = process.env.APP_ENV === 'dev'
@@ -99,11 +99,28 @@ export const config: VendureConfig = {
       },
     }),
     AdminUiPlugin.init({
+      adminUiConfig: {
+        brand: 'RealT',
+        hideVendureBranding: false,
+        hideVersion: false,
+      },
       route: 'admin',
       port: 3002,
       app: compileUiExtensions({
         outputPath: path.join(__dirname, '../admin-ui'),
         extensions: [
+          setBranding({
+            // The small logo appears in the top left of the screen
+            smallLogoPath: path.join(
+              __dirname,
+              'ui-extensions/images/RealT_Logo.png'
+            ),
+            // The large logo is used on the login page
+            largeLogoPath: path.join(
+              __dirname,
+              'ui-extensions/images/RealT_Logo.png'
+            ),
+          }),
           {
             // Points to the path containing our Angular "glue code" module
             extensionPath: path.join(__dirname, 'ui-extensions'),
