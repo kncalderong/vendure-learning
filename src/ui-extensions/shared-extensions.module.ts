@@ -7,14 +7,16 @@ import {
   addActionBarItem,
   registerFormInputComponent,
   registerPageTab,
+  registerCustomDetailComponent,
 } from '@vendure/admin-ui/core'
 import { firstValueFrom } from 'rxjs'
 import { SliderControl } from './components/intensity-controller/intensity-controller.component'
 import { AllProductReviewsListComponent } from './components/all-product-reviews-list/all-product-reviews-list.component'
+import { ProductInfoComponent } from './components/custom-detail-component/custom-detail-component.component'
 
 @NgModule({
   imports: [SharedModule],
-  declarations: [SliderControl],
+  declarations: [SliderControl, ProductInfoComponent],
   providers: [
     registerFormInputComponent('slider-form-input', SliderControl),
     registerPageTab({
@@ -23,6 +25,10 @@ import { AllProductReviewsListComponent } from './components/all-product-reviews
       route: 'reviews',
       tabIcon: 'star',
       component: AllProductReviewsListComponent,
+    }),
+    registerCustomDetailComponent({
+      locationId: 'product-detail',
+      component: ProductInfoComponent,
     }),
     addNavMenuSection({
       id: 'greeter',
